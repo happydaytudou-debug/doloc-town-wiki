@@ -1,0 +1,6 @@
+---
+import { withBase } from '../lib/paths';
+interface Props { category: { title: string; path: string; guides: unknown[] } }
+const { category } = Astro.props;
+---
+<a class="category-link-card" href={withBase(category.path)}><span>{category.guides.length} guides</span><strong>{category.title}</strong><span aria-hidden="true">→</span></a>

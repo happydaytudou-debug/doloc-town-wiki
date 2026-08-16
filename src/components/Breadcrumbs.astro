@@ -1,0 +1,6 @@
+---
+import { withBase } from '../lib/paths';
+interface Props { current: string; parents?: { label: string; path: string }[] }
+const { current, parents = [] } = Astro.props;
+---
+<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href={withBase('/')}>Home</a></li>{parents.map((parent) => <li><a href={withBase(parent.path)}>{parent.label}</a></li>)}<li aria-current="page">{current}</li></ol></nav>

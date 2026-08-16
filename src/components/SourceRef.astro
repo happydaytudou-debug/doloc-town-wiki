@@ -1,0 +1,5 @@
+---
+interface Props { id: string }
+const { id } = Astro.props;
+---
+<a class="source-ref" href={`#source-${id}`} aria-label={`Source ${id}`}>[{id}]</a>

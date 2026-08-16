@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import GuideNote from '../../components/GuideNote.astro';
+import GuideWarning from '../../components/GuideWarning.astro';
+import SourceRef from '../../components/SourceRef.astro';
+import StepList from '../../components/StepList.astro';
+import DataTable from '../../components/DataTable.astro';
+import { getGuideNeighbors, getRelatedGuides, type GuideEntry } from '../../lib/guides';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('guides');
+  return entries.map((entry) => ({ params: { category: entry.data.category, guide: entry.data.slug }, props: { entry, entries } }));
+}
+interface Props { entry: GuideEntry; entries: GuideEntry[] }
+const { entry, entries } = Astro.props;
+const { Content, headings } = await render(entry);
+const related = getRelatedGuides(entries, entry);
+const { previous, next } = getGuideNeighbors(entries, entry);
+---
+<GuideLayout entry={entry} headings={headings} related={related} previous={previous} next={next}><Content components={{ GuideNote, GuideWarning, SourceRef, StepList, DataTable }}/></GuideLayout>

@@ -1,0 +1,15 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SeoHead from '../components/SeoHead.astro';
+import { site } from '../data/site';
+import { buildCanonical } from '../lib/seo';
+import { withBase } from '../lib/paths';
+import '../styles/global.css';
+import '../styles/accessibility.css';
+interface Props { title?: string; description?: string; canonicalPath?: string; openGraphType?: 'website' | 'article'; noindex?: boolean; jsonLd?: Record<string, unknown>[] }
+const { title = 'Doloc Town Wiki — Guides, Crops, Map & Recipes', description = site.description, canonicalPath = '/', openGraphType = 'website', noindex = false, jsonLd = [] } = Astro.props;
+if (!Astro.site) throw new Error('Astro site URL must be configured');
+const canonical = buildCanonical(Astro.site, canonicalPath);
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="theme-color" content="#f4efe2"/><link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml"/><SeoHead {title} {description} {canonical} {openGraphType} {noindex} {jsonLd}/></head><body><a class="skip-link" href="#main-content">Skip to content</a><div class="shell"><SiteHeader/><main id="main-content"><slot/></main><SiteFooter/></div></body></html>

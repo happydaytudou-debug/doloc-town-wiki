@@ -1,0 +1,23 @@
+---
+import { categories } from '../data/homepage';
+import { withBase } from '../lib/paths';
+import MobileNav from './MobileNav.astro';
+import '../styles/navigation.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pathname = Astro.url.pathname.replace(base, '') || '/';
+const currentFor = (path: string): 'page' | 'location' | undefined => {
+  if (path === '/') return pathname === '/' ? 'page' : undefined;
+  if (pathname === path) return 'page';
+  return pathname.startsWith(path) ? 'location' : undefined;
+};
+const navItems = [
+  { label: 'Home', href: withBase('/'), current: currentFor('/') },
+  ...categories.map((category) => ({ label: category.title, href: withBase(category.path), current: currentFor(category.path) })),
+];
+---
+<header class="site-header">
+  <a class="brand" href={withBase('/')}>Doloc Town <span>Wiki</span></a>
+  <MobileNav items={navItems}/>
+  <nav class="desktop-nav" aria-label="Primary navigation">{navItems.map((item) => <a href={item.href} aria-current={item.current}>{item.label}</a>)}</nav>
+</header>

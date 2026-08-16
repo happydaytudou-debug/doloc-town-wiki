@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories, popularGuides } from '../data/homepage';
+import { site } from '../data/site';
+import { withBase } from '../lib/paths';
+import { buildWebSiteJsonLd } from '../lib/seo';
+if (!Astro.site) throw new Error('Astro site URL must be configured');
+const jsonLd = [buildWebSiteJsonLd(Astro.site)];
+---
+<BaseLayout canonicalPath="/" jsonLd={jsonLd}>
+  <section class="hero"><div><p class="eyebrow">Independent Fan-Made Guide</p><h1>Survive. Cultivate. Rebuild.</h1><p class="lede">Build a vertical farm and restore a post-apocalyptic wasteland. Explore ruins, meet townsfolk, grow crops, craft equipment, and shape an automated farm.</p><div class="actions"><a class="button primary" href={withBase('/guides/beginner-guide/')}>Start Beginner Guide</a><a class="button" href={withBase('/map-quests/map/')}>Explore the Map</a></div></div><div class="hero-art" aria-hidden="true"><span>FIELD UNIT // 01</span><div class="sun"></div><div class="farm-lines"></div></div></section>
+  <section class="core-strip" aria-label="Guide scope"><span>16 focused guides</span><span>4 clear categories</span><span>Evidence-aware content</span><span>Independent fan-made resource</span></section>
+  <section class="section"><p class="eyebrow">Start Here</p><h2>Your Doloc Town Journey</h2><div class="card-grid four">{categories.map((c, i) => <a class="card" href={withBase(c.path)}><span class="number">0{i + 1}</span><h3>{c.title}</h3><p>{c.guides.length} focused guides for this part of your journey.</p></a>)}</div></section>
+  <section class="section split"><div><p class="eyebrow">Game Overview</p><h2>What is Doloc Town?</h2><p>Doloc Town is presented in the supplied materials as a side-scrolling pixel-art farming simulation set in a post-apocalyptic wasteland. Its guide topics span farming, exploration, relationships, crafting, fishing, ranching, and automation.</p><p class="verification">Needs Verification: detailed gameplay claims will be checked against exact sources before publication.</p></div><div class="mechanical-panel"><span>WASTELAND FIELD NOTES</span><strong>Grow upward.<br/>Build forward.</strong></div></section>
+  <section class="section"><p class="eyebrow">Browse the Wiki</p><h2>Guide Categories</h2><div class="card-grid two">{categories.map((c) => <article class="category-card"><h3><a href={withBase(c.path)}>{c.title}</a></h3><ul>{c.guides.map((g) => <li><a href={withBase(`/${c.slug}/${g.slug}/`)}>{g.title}</a></li>)}</ul></article>)}</div></section>
+  <section class="section"><p class="eyebrow">Popular Guides</p><h2>Start with the Essentials</h2><div class="card-grid three">{popularGuides.map((g) => <a class="card compact" href={withBase(g.path)}><span class="status">Needs Verification</span><h3>{g.title}</h3><p>Planned from the submitted keyword and page matrix.</p></a>)}</div></section>
+  <section class="section video"><div><p class="eyebrow">Official Video</p><h2>Doloc Town 1.0 Launch Trailer</h2><p>The supplied source package identifies this as the official launch trailer. Its current status remains to be verified before final publication.</p></div><a class="button" href={site.video} target="_blank" rel="noopener noreferrer">Watch supplied video link</a></section>
+  <section class="final-cta"><p class="eyebrow">Field Guide Ready</p><h2>Ready to Master Doloc Town?</h2><p>Begin with the opening guide, then follow the map, farming, character, and item paths that match your next goal.</p><div class="actions"><a class="button primary" href={withBase('/guides/beginner-guide/')}>Read the Beginner Guide</a><a class="button" href={site.steam} target="_blank" rel="noopener noreferrer">View supplied Steam link</a></div></section>
+</BaseLayout>

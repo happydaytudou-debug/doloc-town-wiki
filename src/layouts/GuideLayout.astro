@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SourceList from '../components/SourceList.astro';
+import VerificationBadge from '../components/VerificationBadge.astro';
+import type { GuideEntry } from '../lib/guides';
+import { categories } from '../data/categories';
+import { withBase } from '../lib/paths';
+import { buildBreadcrumbJsonLd, buildGuideJsonLd } from '../lib/seo';
+import '../styles/guide.css';
+
+interface Props { entry: GuideEntry; headings: { depth: number; slug: string; text: string }[]; related: GuideEntry[]; previous?: GuideEntry; next?: GuideEntry }
+const { entry, headings, related, previous, next } = Astro.props;
+const category = categories.find(({ id }) => id === entry.data.category);
+if (!category) throw new Error(`Unknown category ${entry.data.category}`);
+const toc = headings.filter(({ depth }) => depth === 2);
+const route = (guide: GuideEntry) => `/${guide.data.category}/${guide.data.slug}/`;
+const guidePath = route(entry);
+if (!Astro.site) throw new Error('Astro site URL must be configured');
+const jsonLd = [
+  buildGuideJsonLd(Astro.site, guidePath, entry.data.title, entry.data.description),
+  buildBreadcrumbJsonLd(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: category.title, path: category.path },
+    { name: entry.data.title, path: guidePath },
+  ]),
+];
+---
+<BaseLayout title={`${entry.data.title} — Doloc Town Fan-Made Wiki`} description={entry.data.description} canonicalPath={guidePath} openGraphType="article" jsonLd={jsonLd}>
+  <Breadcrumbs current={entry.data.title} parents={[{ label: category.title, path: category.path }]}/>
+  <article class="guide-article">
+    <header class="guide-header"><p class="eyebrow"><a href={withBase(category.path)}>{category.title}</a> // Guide {String(entry.data.priority).padStart(2, '0')}</p><h1>{entry.data.title}</h1><p class="guide-summary">{entry.data.summary}</p><div class="guide-meta"><VerificationBadge status={entry.data.verificationStatus}/><span>Updated {entry.data.updated.toISOString().slice(0, 10)}</span><span>Category: <a href={withBase(category.path)}>{category.title}</a></span></div></header>
+    <div class="guide-layout">
+      <nav class="guide-toc" aria-label="On this page"><strong>On this page</strong><ol>{toc.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>
+      <div class="guide-body"><slot/></div>
+    </div>
+    <SourceList sources={entry.data.sources}/>
+    <section class="related-guides" aria-labelledby="related-guides-title"><p class="eyebrow">Continue Reading</p><h2 id="related-guides-title">Related Guides</h2><div>{related.map((guide) => <a href={withBase(route(guide))}><span>{categories.find(({ id }) => id === guide.data.category)?.title}</span><strong>{guide.data.title}</strong></a>)}</div></section>
+    <nav class="guide-neighbors" aria-label="Guide sequence">{previous ? <a href={withBase(route(previous))}><span>Previous</span><strong>{previous.data.title}</strong></a> : <span></span>}{next && <a href={withBase(route(next))}><span>Next</span><strong>{next.data.title}</strong></a>}</nav>
+  </article>
+</BaseLayout>

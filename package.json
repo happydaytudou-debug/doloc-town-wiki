@@ -1,0 +1,25 @@
+{
+  "name": "doloc-town-wiki",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "check:a11y": "node scripts/check-accessibility.mjs",
+    "check:preview": "node scripts/check-preview.mjs",
+    "test": "node --test test/*.test.mjs",
+    "validate:content": "node scripts/validate-content.mjs --allow-empty",
+    "validate:build": "node scripts/validate-build.mjs",
+    "verify": "npm run check && npm run validate:content && npm run build && npm run check:a11y && npm test && npm run validate:build"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.1",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "categories": [
+    {
+      "id": "guides",
+      "title": "Guides",
+      "slug": "guides",
+      "guides": [
+        { "id": "beginner-guide", "title": "Beginner Guide", "slug": "beginner-guide", "priority": 1, "verificationStatus": "Needs Verification" },
+        { "id": "walkthrough", "title": "Walkthrough", "slug": "walkthrough", "priority": 6, "verificationStatus": "Needs Verification" },
+        { "id": "tips-and-tricks", "title": "Tips and Tricks", "slug": "tips-and-tricks", "priority": 2, "verificationStatus": "Needs Verification" }
+      ]
+    },
+    {
+      "id": "farming",
+      "title": "Farming",
+      "slug": "farming",
+      "guides": [
+        { "id": "most-profitable-crops", "title": "Most Profitable Crops", "slug": "most-profitable-crops", "priority": 3, "verificationStatus": "Needs Verification" },
+        { "id": "crop-tier-list", "title": "Crop Tier List", "slug": "crop-tier-list", "priority": 11, "verificationStatus": "Needs Verification" },
+        { "id": "gene-system", "title": "Gene System", "slug": "gene-system", "priority": 4, "verificationStatus": "Needs Verification" },
+        { "id": "ranching-guide", "title": "Ranching Guide", "slug": "ranching-guide", "priority": 16, "verificationStatus": "Needs Verification" },
+        { "id": "fish-locations", "title": "Fish Locations", "slug": "fish-locations", "priority": 8, "verificationStatus": "Needs Verification" },
+        { "id": "automation", "title": "Automation", "slug": "automation", "priority": 10, "verificationStatus": "Needs Verification" }
+      ]
+    },
+    {
+      "id": "characters-items",
+      "title": "Characters & Items",
+      "slug": "characters-items",
+      "guides": [
+        { "id": "npc-gifts", "title": "NPC Gifts", "slug": "npc-gifts", "priority": 9, "verificationStatus": "Needs Verification" },
+        { "id": "recipes", "title": "Recipes", "slug": "recipes", "priority": 7, "verificationStatus": "Needs Verification" },
+        { "id": "metal-frame", "title": "Metal Frame", "slug": "metal-frame", "priority": 13, "verificationStatus": "Needs Verification" },
+        { "id": "old-chips", "title": "Old Chips", "slug": "old-chips", "priority": 14, "verificationStatus": "Needs Verification" },
+        { "id": "old-engine-cores", "title": "Old Engine Cores", "slug": "old-engine-cores", "priority": 15, "verificationStatus": "Needs Verification" }
+      ]
+    },
+    {
+      "id": "map-quests",
+      "title": "Map & Quests",
+      "slug": "map-quests",
+      "guides": [
+        { "id": "map", "title": "Map", "slug": "map", "priority": 5, "verificationStatus": "Needs Verification" },
+        { "id": "wetlands-pipes", "title": "Wetlands Pipes", "slug": "wetlands-pipes", "priority": 12, "verificationStatus": "Needs Verification" }
+      ]
+    }
+  ]
+}

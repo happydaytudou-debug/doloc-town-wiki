@@ -1,0 +1,5 @@
+---
+interface Props { caption: string }
+const { caption } = Astro.props;
+---
+<div class="table-scroll" tabindex="0"><table><caption>{caption}</caption><slot/></table></div>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  openGraphType?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description, canonical, openGraphType = 'website', noindex = false, jsonLd = [] } = Astro.props;
+---
+<meta name="description" content={description}/>
+{noindex && <meta name="robots" content="noindex, nofollow"/>}
+<link rel="canonical" href={canonical}/>
+<meta property="og:title" content={title}/>
+<meta property="og:description" content={description}/>
+<meta property="og:type" content={openGraphType}/>
+<meta property="og:url" content={canonical}/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content={title}/>
+<meta name="twitter:description" content={description}/>
+{jsonLd.map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)}/>)}
+<title>{title}</title>

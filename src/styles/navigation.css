@@ -1,0 +1,11 @@
+[hidden] { display: none !important; }
+button:focus-visible { outline: 3px solid var(--rust); outline-offset: 4px; }
+.breadcrumbs { padding-top: 30px; }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; color: var(--muted); font-size: .86rem; list-style: none; }
+.breadcrumbs li + li::before { content: "/"; margin-right: 10px; color: var(--line); }
+.mobile-nav button { min-height: 44px; padding: 8px 12px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); font: inherit; font-weight: 800; cursor: pointer; }
+.desktop-nav [aria-current], .mobile-nav [aria-current] { color: var(--rust-dark); text-decoration: underline; text-decoration-thickness: .12em; }
+@media (max-width: 800px) {
+  .mobile-nav nav { min-width: 210px; }
+  .mobile-nav nav a { min-height: 44px; display: flex; align-items: center; }
+}

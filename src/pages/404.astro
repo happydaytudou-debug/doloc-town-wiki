@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories } from '../data/homepage';
+import { withBase } from '../lib/paths';
+---
+<BaseLayout title="Page Not Found | Doloc Town Wiki" description="Return to the Doloc Town Wiki homepage or browse a guide category." canonicalPath="/404.html" noindex={true}><section class="not-found"><p class="eyebrow">Error // 404</p><h1>Page not found</h1><p>This route has disappeared into the wasteland. Return to base or choose a guide category.</p><a class="button primary" href={withBase('/')}>Return Home</a><nav aria-label="404 recovery links">{categories.map((c) => <a href={withBase(c.path)}>{c.title}</a>)}</nav></section></BaseLayout>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import GuideCard from '../components/GuideCard.astro';
+import { categories, type Category } from '../data/categories';
+import { withBase } from '../lib/paths';
+import { buildBreadcrumbJsonLd, buildCollectionJsonLd } from '../lib/seo';
+import '../styles/category.css';
+
+interface Props { category: Category }
+const { category } = Astro.props;
+const recommended = category.guides.find(({ id }) => id === category.recommendedFirst);
+if (!recommended) throw new Error(`Unknown recommended guide for ${category.id}`);
+const otherCategories = categories.filter(({ id }) => id !== category.id);
+const categoryGuideLabel = category.id === 'guides' ? 'Guides' : `${category.title} Guides`;
+if (!Astro.site) throw new Error('Astro site URL must be configured');
+const jsonLd = [
+  buildCollectionJsonLd(Astro.site, category.path, categoryGuideLabel, category.description),
+  buildBreadcrumbJsonLd(Astro.site, [{ name: 'Home', path: '/' }, { name: category.title, path: category.path }]),
+];
+---
+<BaseLayout title={`Doloc Town ${categoryGuideLabel} — Fan-Made Wiki`} description={category.description} canonicalPath={category.path} jsonLd={jsonLd}>
+  <Breadcrumbs current={category.title}/>
+  <header class="category-hero"><p class="eyebrow">Category Index // {String(category.guides.length).padStart(2, '0')} Routes</p><h1>{category.title}</h1><p class="lede">{category.introduction}</p></header>
+  <section class="recommended" aria-labelledby="recommended-title" data-recommended-guide={recommended.id}><div><p class="eyebrow">Recommended First</p><h2 id="recommended-title">{recommended.title}</h2><p>Start with this entry in the submitted page order, then choose the route that matches the information you need.</p></div><a class="button primary" href={withBase(recommended.path)}>Open {recommended.title}</a></section>
+  <section class="category-section" aria-labelledby="all-guides-title"><div class="section-heading"><div><p class="eyebrow">Complete Index</p><h2 id="all-guides-title">All {categoryGuideLabel}</h2></div><p>{category.guides.length} planned guide routes from the approved 16-page matrix.</p></div><div class="guide-grid">{category.guides.map((guide) => <GuideCard guide={guide}/>)}</div></section>
+  <section class="reading-path" aria-labelledby="reading-path-title"><p class="eyebrow">Reading Path</p><h2 id="reading-path-title">Follow the Submitted Order</h2><p>This sequence preserves the approved category membership and page order. It is a navigation aid, not gameplay advice.</p><ol>{category.guides.map((guide) => <li><a href={withBase(guide.path)}>{guide.title}</a><span>{guide.verificationStatus}</span></li>)}</ol></section>
+  <section class="category-section" aria-labelledby="other-categories-title"><p class="eyebrow">Keep Exploring</p><h2 id="other-categories-title">Explore Other Categories</h2><div class="category-link-grid">{otherCategories.map((item) => <CategoryCard category={item}/>)}</div></section>
+</BaseLayout>

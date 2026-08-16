@@ -1,0 +1,5 @@
+---
+interface Props { status: 'Needs Verification' | 'Verified' }
+const { status } = Astro.props;
+---
+<span class:list={['verification-badge', status === 'Verified' ? 'is-verified' : 'needs-verification']}>{status}</span>

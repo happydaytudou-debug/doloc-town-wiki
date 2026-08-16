@@ -1,0 +1,90 @@
+{
+  "home": {
+    "meta": {
+      "title": "Doloc Town Wiki — Guides, Crops, Map & Recipes",
+      "description": "Master Doloc Town with beginner guides, crop rankings, recipes, maps, NPC gifts, item locations, ranching tips, gene systems, and automation help."
+    },
+    "hero": {
+      "eyebrow": "Fan-Made Community Wiki",
+      "title": "Doloc Town",
+      "description": "Build a vertical farm and restore a post-apocalyptic wasteland while surviving acid rain, heatwaves, and thunderstorms. Explore ruins, befriend townsfolk, modify crop genes, raise animals, and automate your growing farm.",
+      "stats": [
+        "Full Release Aug 2026",
+        "Updated Aug 2026",
+        "30+ Hours Main Story",
+        "100+ Hours Extra Content",
+        "80 Steam Achievements"
+      ],
+      "primaryCta": "Start Beginner Guide",
+      "secondaryCta": "Explore the Map",
+      "tertiaryCta": "Find Items & Recipes",
+      "videoLabel": "Official 1.0 Launch Trailer"
+    },
+    "start": {
+      "eyebrow": "Start Here",
+      "title": "Your Doloc Town Journey",
+      "cards": [
+        {
+          "number": "1",
+          "title": "Beginner Guide",
+          "description": "Learn the first priorities, essential tools, early upgrades, and mistakes to avoid when starting your farm."
+        },
+        {
+          "number": "2",
+          "title": "Crops & Gene System",
+          "description": "Choose profitable crops, understand crop genes, and improve harvest value in every stage of the game."
+        },
+        {
+          "number": "3",
+          "title": "Map & Exploration",
+          "description": "Navigate the valley, Wetlands, ruins, and quest locations while finding useful resources and shortcuts."
+        },
+        {
+          "number": "4",
+          "title": "Farming Automation",
+          "description": "Use power systems and robotic drones to automate planting, watering, and harvesting on your vertical farm."
+        }
+      ]
+    },
+    "aboutGame": {
+      "title": "What is Doloc Town?",
+      "paragraphs": [
+        "Doloc Town is a side-scrolling pixel-art farming simulation set in a post-apocalyptic wasteland. You play as a young scavenger who builds a vertical farm, gathers resources, crafts equipment, fishes, cooks, explores ruins, and helps restore a struggling settlement.",
+        "Its farming systems are shaped by acid rain, heatwaves, thunderstorms, crop genes, ranching, and automation. Players can turn harsh weather into power and irrigation, build relationships with townsfolk, uncover the main story, and grow from survivor to farming tycoon."
+      ],
+      "stats": [
+        { "label": "Developer", "value": "RedSaw Games Studio" },
+        { "label": "Platform", "value": "Windows PC via Steam" },
+        { "label": "Genre", "value": "Farming Simulation RPG" },
+        { "label": "Full Release", "value": "Aug 6, 2026" },
+        { "label": "Main Story", "value": "30+ Hours" },
+        { "label": "Extra Content", "value": "100+ Hours" },
+        { "label": "Achievements", "value": "80" }
+      ],
+      "cta": "Explore All Guides"
+    },
+    "finalCta": {
+      "title": "Ready to Master Doloc Town?",
+      "description": "From your first scrap-built farm to crop genes, ranching, Wetlands puzzles, rare materials, and full automation, our community wiki helps you make steady progress across the wasteland.",
+      "primary": "Read the Beginner Guide",
+      "secondary": "Play on Steam"
+    }
+  },
+  "footer": {
+    "aboutTitle": "Doloc Town Wiki",
+    "about": "Doloc Town Wiki is an independent fan-made guide site for players exploring the post-apocalyptic farming simulation. It covers beginner progression, crops, genes, maps, quests, NPC gifts, recipes, materials, ranching, and automation. It is not affiliated with RedSaw Games Studio, Logoi Games, Pathea Games, or Valve.",
+    "description": "Fan-made guides for the post-apocalyptic vertical farming sim Doloc Town.",
+    "playGame": "Play Doloc Town on Steam",
+    "officialDiscord": "Official Discord",
+    "officialYoutube": "Official YouTube",
+    "communityTool": "Steam Community",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "sidebarCodes": ["暂无", "暂无"],
+  "metadata": {
+    "title": "Doloc Town Wiki — Guides, Crops, Map & Recipes",
+    "description": "Explore Doloc Town guides for crops, genes, recipes, maps, NPC gifts, fishing, rare items, ranching, quests, and farm automation in one clear wiki.",
+    "keywords": "Doloc Town, wiki, guide, crops, map, recipes, NPC gifts, automation"
+  }
+}

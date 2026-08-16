@@ -1,0 +1,8 @@
+---
+import CategoryLayout from '../../layouts/CategoryLayout.astro';
+import { categories, type Category } from '../../data/categories';
+export function getStaticPaths() { return categories.map((category) => ({ params: { category: category.slug }, props: { category } })); }
+interface Props { category: Category }
+const { category } = Astro.props;
+---
+<CategoryLayout category={category}/>

@@ -1,0 +1,6 @@
+---
+import { categories } from '../data/homepage';
+import { site } from '../data/site';
+import { withBase } from '../lib/paths';
+---
+<footer class="site-footer"><div><strong>Doloc Town Wiki</strong><p>{site.disclaimer}</p></div><nav aria-label="Footer navigation">{categories.map((c) => <a href={withBase(c.path)}>{c.title}</a>)}</nav></footer>
