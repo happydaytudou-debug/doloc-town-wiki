@@ -657,9 +657,9 @@ Parse emitted HTML and fail on missing/duplicate H1, duplicate titles, nonexiste
 
 - [ ] **Step 6: Run full Stage 4 checks**
 
-Run: `PUBLIC_SITE_URL=https://example.invalid npm run build && npm run validate:build && npm test`
+Run: `PUBLIC_SITE_URL=https://doloc-town-wiki-3c1.pages.dev npm run build && npm run validate:build && npm test`
 
-Expected: All structural tests pass. `example.invalid` is used only as a deterministic test host and must not be committed as the production canonical default.
+Expected: All structural tests pass. The approved production origin is used as the canonical default.
 
 - [ ] **Step 7: Manually audit citation correspondence**
 

@@ -120,7 +120,7 @@ test('all sixteen guide routes render the complete guide contract', async () => 
 test('all indexable pages emit canonical, social metadata, and valid restrained JSON-LD', async () => {
   for (const path of contentPaths) {
     const html = await read(`${path ? `${path}/` : ''}index.html`);
-    const canonical = `https://example.invalid/${path ? `${path}/` : ''}`;
+    const canonical = `https://doloc-town-wiki-3c1.pages.dev/${path ? `${path}/` : ''}`;
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`));
     assert.match(html, /<meta property="og:title" content="[^"]+"/);
     assert.match(html, /<meta property="og:description" content="[^"]+"/);
@@ -146,13 +146,13 @@ test('404 is noindex and sitemap and robots contain exactly the twenty-one conte
 
   const sitemap = await read('sitemap-0.xml');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(urls.sort(), contentPaths.map((path) => `https://example.invalid/${path ? `${path}/` : ''}`).sort());
+  assert.deepEqual(urls.sort(), contentPaths.map((path) => `https://doloc-town-wiki-3c1.pages.dev/${path ? `${path}/` : ''}`).sort());
   assert.ok(!urls.some((url) => url.includes('404')));
 
   const robots = await read('robots.txt');
   assert.match(robots, /User-agent: \*/);
   assert.match(robots, /Allow: \//);
-  assert.match(robots, /Sitemap: https:\/\/example\.invalid\/sitemap-index\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/doloc-town-wiki-3c1\.pages\.dev\/sitemap-index\.xml/);
 });
 
 test('shared shell and navigation expose the required accessibility contract', async () => {

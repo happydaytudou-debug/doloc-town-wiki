@@ -2,8 +2,8 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
-// Reserved placeholder only. Set PUBLIC_SITE_URL to the real origin before deployment.
-const site = process.env.PUBLIC_SITE_URL || 'https://example.invalid';
+// Production origin. PUBLIC_SITE_URL remains available for explicit preview overrides.
+const site = process.env.PUBLIC_SITE_URL || 'https://doloc-town-wiki-3c1.pages.dev';
 const base = process.env.PUBLIC_BASE_PATH || '/';
 
 export default defineConfig({

@@ -1,6 +1,6 @@
 # Doloc Town Wiki
 
-Doloc Town Wiki is an independent, fan-made English guide site. It is not affiliated with or endorsed by the developers or publishers of Doloc Town. The project currently runs and builds locally; no GitHub repository, hosting connection, or deployment has been configured.
+Doloc Town Wiki is an independent, fan-made English guide site. It is not affiliated with or endorsed by the developers or publishers of Doloc Town. The production site is deployed to Cloudflare Pages from the public GitHub repository.
 
 ## Technology
 
@@ -10,6 +10,7 @@ Doloc Town Wiki is an independent, fan-made English guide site. It is not affili
 - Native CSS
 - Node's built-in test runner
 - `@astrojs/sitemap`
+- Cloudflare Pages with Wrangler 4
 
 ## Requirements and local commands
 
@@ -76,13 +77,13 @@ Every `<SourceRef id="..." />` must resolve to a source declared on the same pag
 
 ## Site URL, canonical URLs, and base paths
 
-The single site-origin configuration is in `astro.config.mjs`. Until a real production origin is approved, builds use the reserved placeholder:
+The single default site origin is configured in `astro.config.mjs`:
 
 ```text
-https://example.invalid
+https://doloc-town-wiki-3c1.pages.dev
 ```
 
-This is not a real domain and must be replaced before deployment. Set the approved origin without editing components:
+Production uses the root path. For an explicit preview or future approved custom-domain build, override the origin without editing components:
 
 ```sh
 PUBLIC_SITE_URL=https://approved.example npm run build
@@ -96,6 +97,23 @@ PUBLIC_SITE_URL=https://approved.example PUBLIC_BASE_PATH=/repository-name/ npm 
 
 Canonical URLs, Open Graph URLs, JSON-LD URLs, sitemap URLs, robots output, internal links, and assets derive from Astro's central `site` and `base` configuration.
 
+## Deployment
+
+- GitHub repository: <https://github.com/happydaytudou-debug/doloc-town-wiki>
+- Cloudflare Pages project: `doloc-town-wiki`
+- Production branch: `main`
+- Production URL: <https://doloc-town-wiki-3c1.pages.dev>
+- Build command: `npm run build`
+- Build output directory: `dist`
+
+Wrangler is installed as a project development dependency. `wrangler.json` records the Pages project name and output directory. After running the complete verification gate, deploy the generated root-path site with:
+
+```sh
+npx wrangler pages deploy dist --project-name doloc-town-wiki --branch main
+```
+
+Cloudflare credentials remain in Wrangler's user-level configuration and must never be committed. The generated `dist` directory also remains untracked.
+
 ## SEO output
 
 - Home: `WebSite` JSON-LD
@@ -106,17 +124,16 @@ Canonical URLs, Open Graph URLs, JSON-LD URLs, sitemap URLs, robots output, inte
 
 Structured data intentionally omits unverified authors, publishers, organizations, logos, images, ratings, reviews, and publication dates.
 
-## Before deployment
+## Before a future production update
 
-Before any public deployment:
+Before publishing an update:
 
-1. Approve and set the real `PUBLIC_SITE_URL` and any `PUBLIC_BASE_PATH`.
-2. Replace discovery-only links with exact claim-level sources where evidence permits.
-3. Re-review every `Needs Verification` statement; do not upgrade status merely to make a page appear complete.
-4. Confirm social/video affiliation and reachability where those claims remain visible.
-5. Run `npm run verify` against the final configuration and inspect the production preview.
-6. Complete the Stage 5 responsive, accessibility, keyboard, and full-page manual acceptance checklist.
+1. Replace discovery-only links with exact claim-level sources where evidence permits.
+2. Re-review every `Needs Verification` statement; do not upgrade status merely to make a page appear complete.
+3. Confirm social/video affiliation and reachability where those claims remain visible.
+4. Run `npm run verify` against the final root-path configuration and inspect the production preview.
+5. Complete the responsive, accessibility, keyboard, and full-page acceptance checklist.
 
 The latest local acceptance evidence is recorded in `docs/qa/final-acceptance.md`. It distinguishes automated checks from browser screenshot review and does not claim that automation is manual testing.
 
-Git initialization, GitHub connection, commits, pushes, and deployment are outside the current authorized scope and have not been performed.
+No custom domain has been purchased or connected. The `pages.dev` origin remains the canonical production address unless an owner-approved domain replaces it in a later release.

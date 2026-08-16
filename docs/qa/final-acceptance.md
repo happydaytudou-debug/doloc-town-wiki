@@ -102,7 +102,7 @@ Additional deterministic checks covered placeholder terms, old category routes, 
 
 ## Known limitations and deployment prerequisites
 
-- `https://example.invalid` is a reserved placeholder, not the production domain. An approved `PUBLIC_SITE_URL` is required before deployment.
+- The local acceptance used a reserved placeholder origin; the later Cloudflare release replaced it with the approved `pages.dev` production origin.
 - All sixteen guides still contain evidence-bounded first editions. Specific mechanics, values, locations, recipes, preferences, quest steps, and item details remain `Needs Verification` until exact sources are approved.
 - Discovery-only URLs must not be upgraded merely to make content appear complete.
 - No Git repository, GitHub connection, push, or deployment has been performed.
