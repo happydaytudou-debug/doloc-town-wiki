@@ -108,12 +108,20 @@ All sixteen approved guide entries now exist as English MDX pages with page-leve
 
 The six priority pages—Beginner Guide, Tips and Tricks, Most Profitable Crops, Gene System, Map, and Walkthrough—contain the fullest evidence-bound structure. The remaining ten pages provide concise reader-facing scope, verification requirements, cautions, and related navigation without inventing requested answers. Exact prices, growth cycles, tiers, gene effects, progression steps, locations, recipes, conditions, preferences, automation values, puzzle solutions, item sources, ranching data, and other detailed mechanics remain unresolved.
 
-Each page separates an empty `Verified Sources` region from `Sources for Verification`. This records the current evidence state honestly and prevents discovery inputs from being presented as support for a specific conclusion.
+The original Stage 3 display separated an empty `Verified Sources` region from `Sources for Verification`. The later public-language revision replaces this audit-style presentation while preserving the same internal source states.
 
 ## Stage 4 SEO and citation audit — 2026-08-16
 
 All sixteen guide pages passed a source-reference correspondence audit. Every `SourceRef` resolves to a source declared on the same page, every declared source is referenced, and there are no duplicate or orphan source IDs. All declared sources remain `Discovery Only`; none of the S1–S5 storefront, community, discussion, guide-index, or subreddit landing pages was upgraded to claim-level Verified evidence.
 
-The rendered `Verified Sources` section is therefore empty on every guide and explains that no claim-level source has been verified. The separate `Sources for Verification` section lists the supplied discovery inputs, their source type, supplied check date, and intended use. This display behavior matches the content status rather than implying that source availability proves a gameplay conclusion.
+The Stage 4 render used an empty `Verified Sources` section plus `Sources for Verification`. This historical record is superseded by the public-language revision below; source-reference relationships and internal status decisions remain unchanged.
 
 SEO and structured data use only visible page identity and navigation facts. No author, publisher, organization, logo, image, rating, review count, publication date, or unverified gameplay fact is emitted in JSON-LD. The configured `updated` content field remains visible page metadata but is intentionally omitted from Article structured data because it records the local page revision rather than a verified game fact or externally published article history.
+
+## Public source-language revision — 2026-08-17
+
+All sixteen guide frontmatter records remain page-level `Needs Verification`, and every S1–S5 source remains `Discovery Only`. The public badge maps that internal page state to `Source Notes`; category cards and reading paths use the same visitor-facing label. This is a presentation change only and does not upgrade evidence.
+
+The public source headings are now `Reference Sources` and `Additional Research Links`. Because no current guide has a claim-level `Verified` source, the empty `Reference Sources` region is not rendered. `Additional Research Links` shows each broad link’s neutral source type and review date while explicitly stating that the links do not support specific gameplay conclusions. Internal intended-use notes remain available to the validator and audit but are not presented as player-facing proof.
+
+Guide prose now uses player-facing headings such as `What This Guide Covers`, `Before You Begin`, `Check in Your Version`, and `Useful Next Steps`. Exact gameplay values, locations, recipes, preferences, quest steps, and mechanics remain omitted where the imported material does not support them.

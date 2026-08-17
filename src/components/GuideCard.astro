@@ -3,4 +3,4 @@ import { withBase } from '../lib/paths';
 interface Props { guide: { id: string; title: string; path: string; priority: number; verificationStatus: string } }
 const { guide } = Astro.props;
 ---
-<a class="guide-card" href={withBase(guide.path)} data-guide-id={guide.id}><span class="guide-card__number" aria-hidden="true">{String(guide.priority).padStart(2, '0')}</span><div><h3>{guide.title}</h3><p class="status">{guide.verificationStatus}</p></div><span class="guide-card__arrow" aria-hidden="true">→</span></a>
+<a class="guide-card" href={withBase(guide.path)} data-guide-id={guide.id}><span class="guide-card__number" aria-hidden="true">{String(guide.priority).padStart(2, '0')}</span><div><h3>{guide.title}</h3><p class="status">Source Notes</p></div><span class="guide-card__arrow" aria-hidden="true">→</span></a>

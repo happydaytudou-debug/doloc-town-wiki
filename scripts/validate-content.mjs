@@ -20,6 +20,7 @@ for (const file of files) {
   const source = await readFile(new URL(file, contentDir), 'utf8');
   const frontmatter = source.match(/^---\n([\s\S]*?)\n---/)?.[1];
   assert.ok(frontmatter, `${file}: missing frontmatter`);
+  const publicBody = source.slice(source.indexOf('\n---', 4) + 4);
   const field = (name) => frontmatter.match(new RegExp(`^${name}:\\s*(.+)$`, 'm'))?.[1]?.trim();
   const id = field('id');
   const related = (field('relatedGuides')?.match(/^\[(.*)\]$/)?.[1] ?? '').split(',').map((item) => item.trim()).filter(Boolean);
@@ -33,6 +34,7 @@ for (const file of files) {
   assert.ok(sourceRecords.every((match) => match[2].includes('verificationStatus: Discovery Only')), `${file}: source status was upgraded without claim-level evidence`);
   assert.equal(field('verificationStatus'), 'Needs Verification', `${file}: unsupported verification status`);
   assert.doesNotMatch(source, /Lorem ipsum|TODO|TBD|Coming Soon|redeem code|redemption code/i, `${file}: prohibited placeholder or codes content`);
+  assert.doesNotMatch(publicBody, /Needs Verification|Topics awaiting verification|What this first edition can establish|supplied research|this edition does not prescribe|still require exact source verification|no claim-level source|Verified Sources|Sources for Verification/i, `${file}: production-style source language must not appear in public copy`);
   records.push({ file, id, slug: field('slug'), category: field('category'), priority: Number(field('priority')), related });
 }
 

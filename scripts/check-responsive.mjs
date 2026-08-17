@@ -108,7 +108,7 @@ try {
         assert.equal(metrics.guideArticle, true, `${label} must render its guide article`);
         assert.equal(metrics.toc, true, `${label} must render its contents navigation`);
         assert.ok(metrics.sourceRefCount > 0, `${label} must render SourceRef links`);
-        assert.equal(metrics.sourceSections, 2, `${label} must render both source sections`);
+        assert.equal(metrics.sourceSections, 1, `${label} must hide the empty reference section and render additional research links`);
       }
       if (!['home', '404'].includes(route.type)) {
         assert.equal(metrics.breadcrumb, true, `${label} must render breadcrumbs`);

@@ -42,9 +42,11 @@ test('homepage emits the approved shell, SEO, and all required sections', async 
   assert.match(html, /<html lang="en"/);
   assert.match(html, /<title>Doloc Town Wiki — Guides, Crops, Map &amp; Recipes<\/title>/);
   assert.match(html, /Master Doloc Town with beginner guides, crop rankings, recipes, maps, NPC gifts, item locations, ranching tips, gene systems, and automation help\./);
-  for (const text of ['Independent Fan-Made Guide', 'Start Here', 'What is Doloc Town?', 'Guide Categories', 'Popular Guides', 'Official Video', 'Ready to Master Doloc Town?']) assert.match(html, new RegExp(text.replace(/[?]/g, '\\?')));
+  for (const text of ['Independent Fan-Made Guide', 'Start Here', 'What is Doloc Town?', 'Guide Categories', 'Popular Guides', 'Game Video', 'Ready to Master Doloc Town?']) assert.match(html, new RegExp(text.replace(/[?]/g, '\\?')));
   for (const path of ['/guides/', '/farming/', '/characters-items/', '/map-quests/']) assert.match(html, new RegExp(`href="${path}"`));
   assert.match(html, /Doloc Town Wiki is an independent, fan-made guide and is not affiliated with or endorsed by the developers or publishers of Doloc Town\./);
+  assert.match(html, /Source Notes/);
+  assert.doesNotMatch(html, /Needs Verification|supplied materials|submitted keyword|before final publication/i);
   assert.doesNotMatch(html, /2,420|94% Positive|30\+ Hours|100\+ Hours|80 Steam Achievements|Privacy Policy|Terms of Service/);
 });
 
@@ -78,7 +80,8 @@ test('category routes render the exact final matrix with metadata and navigation
     assert.match(html, new RegExp(`data-recommended-guide="${category.recommended}"`));
     assert.match(html, /Reading Path/);
     assert.match(html, /Explore Other Categories/);
-    assert.match(html, /Needs Verification/);
+    assert.match(html, /Source Notes/);
+    assert.doesNotMatch(html, /Needs Verification/i);
 
     const guideCards = [...html.matchAll(/data-guide-id="([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(guideCards, category.guides);
@@ -102,16 +105,17 @@ test('all sixteen guide routes render the complete guide contract', async () => 
       assert.equal(h1Matches.length, 1, `/${category.slug}/${guide}/ must have one H1`);
       assert.match(html, /<article[^>]+class="guide-article"/);
       assert.match(html, /aria-label="Breadcrumb"/);
-      assert.match(html, /Needs Verification/);
+      assert.match(html, /Source Notes/);
       assert.match(html, /aria-label="On this page"/);
       assert.match(html, /Related Guides/);
-      assert.match(html, /Verified Sources/);
-      assert.match(html, /Sources for Verification/);
+      assert.doesNotMatch(html, /Verified Sources|Sources for Verification|No claim-level source has been verified/i);
+      assert.doesNotMatch(html, /<h2[^>]*>Reference Sources<\/h2>/, `/${category.slug}/${guide}/ must not render an empty reference section`);
+      assert.match(html, /Additional Research Links/);
       assert.match(html, /<meta name="description" content="([^"]+)"/);
       const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
       assert.ok(description && !descriptions.has(description), `/${category.slug}/${guide}/ needs a unique description`);
       descriptions.add(description);
-      assert.doesNotMatch(html, /Lorem ipsum|TODO|TBD|Coming Soon/i);
+      assert.doesNotMatch(html, /Lorem ipsum|TODO|TBD|Coming Soon|Needs Verification|Topics awaiting verification|What this first edition can establish|supplied research|this edition does not prescribe/i);
     }
   }
   assert.equal(descriptions.size, 16);

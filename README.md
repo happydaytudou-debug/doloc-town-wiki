@@ -66,12 +66,14 @@ Routes use directory-style trailing slashes. The 404 output is `/404.html`, is m
 
 Guide content lives in `src/content/guides/*.mdx`. The schema is defined in `src/content.config.ts`. Do not change an ID, slug, category, or priority independently of the approved matrix.
 
-Every first-release guide is currently `Needs Verification`. Do not invent prices, mechanics, locations, recipes, character preferences, quest steps, statistics, codes, or sources. Search intent and SEO keywords describe the question a page should answer; they are not evidence that an answer is true.
+Every first-release guide retains the internal `Needs Verification` state. Public pages present this boundary as `Source Notes` so readers see a finished guide with transparent version and sourcing context. Do not invent prices, mechanics, locations, recipes, character preferences, quest steps, statistics, codes, or sources. Search intent and SEO keywords describe the question a page should answer; they are not evidence that an answer is true.
 
 Sources use two display states:
 
 - `Verified` means an exact source supports a specific visible claim. No current guide source has this status.
 - `Discovery Only` means the supplied URL is an entry point for later research and does not verify a detailed claim.
+
+These source states remain internal audit data. Public guide pages use `Reference Sources` for claim-level references and `Additional Research Links` for broader context. Empty reference sections are not rendered, and a discovery link is never presented as proof of a specific gameplay conclusion.
 
 Every `<SourceRef id="..." />` must resolve to a source declared on the same page. Every declared source must be referenced. Player reports must remain attributed, and broad storefront, community, discussion, guide-index, channel, or subreddit pages must not be treated as claim-level evidence.
 
@@ -129,7 +131,7 @@ Structured data intentionally omits unverified authors, publishers, organization
 Before publishing an update:
 
 1. Replace discovery-only links with exact claim-level sources where evidence permits.
-2. Re-review every `Needs Verification` statement; do not upgrade status merely to make a page appear complete.
+2. Re-review every internal `Needs Verification` record; do not upgrade status merely to make a page appear complete.
 3. Confirm social/video affiliation and reachability where those claims remain visible.
 4. Run `npm run verify` against the final root-path configuration and inspect the production preview.
 5. Complete the responsive, accessibility, keyboard, and full-page acceptance checklist.

@@ -1,5 +1,6 @@
 ---
 interface Props { status: 'Needs Verification' | 'Verified' }
 const { status } = Astro.props;
+const publicLabel = status === 'Verified' ? 'Reference Sources' : 'Source Notes';
 ---
-<span class:list={['verification-badge', status === 'Verified' ? 'is-verified' : 'needs-verification']}>{status}</span>
+<span class:list={['verification-badge', status === 'Verified' ? 'is-verified' : 'needs-verification']}>{publicLabel}</span>
