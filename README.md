@@ -1,6 +1,6 @@
 # Doloc Town Wiki
 
-Doloc Town Wiki is an independent, fan-made English guide site. It is not affiliated with or endorsed by the developers or publishers of Doloc Town. The production site is deployed to Cloudflare Pages from the public GitHub repository.
+Doloc Town Wiki is an independent, fan-made English guide site. It is not affiliated with or endorsed by the developers or publishers of Doloc Town. The production site is automatically deployed to Vercel from the public GitHub repository.
 
 ## Technology
 
@@ -10,7 +10,7 @@ Doloc Town Wiki is an independent, fan-made English guide site. It is not affili
 - Native CSS
 - Node's built-in test runner
 - `@astrojs/sitemap`
-- Cloudflare Pages with Wrangler 4
+- Vercel production deployment connected to GitHub `main`
 
 ## Requirements and local commands
 
@@ -82,7 +82,7 @@ Every `<SourceRef id="..." />` must resolve to a source declared on the same pag
 The single default site origin is configured in `astro.config.mjs`:
 
 ```text
-https://doloc-town-wiki-3c1.pages.dev
+https://doloc-town-wiki-opal.vercel.app
 ```
 
 Production uses the root path. For an explicit preview or future approved custom-domain build, override the origin without editing components:
@@ -99,22 +99,17 @@ PUBLIC_SITE_URL=https://approved.example PUBLIC_BASE_PATH=/repository-name/ npm 
 
 Canonical URLs, Open Graph URLs, JSON-LD URLs, sitemap URLs, robots output, internal links, and assets derive from Astro's central `site` and `base` configuration.
 
-## Deployment
+## Deployment and site services
 
 - GitHub repository: <https://github.com/happydaytudou-debug/doloc-town-wiki>
-- Cloudflare Pages project: `doloc-town-wiki`
 - Production branch: `main`
-- Production URL: <https://doloc-town-wiki-3c1.pages.dev>
+- Production URL: <https://doloc-town-wiki-opal.vercel.app>
 - Build command: `npm run build`
 - Build output directory: `dist`
+- Google Analytics measurement ID: `G-ERNNGMPKB0`
+- Google Search Console ownership: verified through the shared head meta tag
 
-Wrangler is installed as a project development dependency. `wrangler.json` records the Pages project name and output directory. After running the complete verification gate, deploy the generated root-path site with:
-
-```sh
-npx wrangler pages deploy dist --project-name doloc-town-wiki --branch main
-```
-
-Cloudflare credentials remain in Wrangler's user-level configuration and must never be committed. The generated `dist` directory also remains untracked.
+Vercel watches the GitHub repository and automatically deploys updates pushed to `main`. The generated `dist` directory remains untracked. Google Analytics and Search Console identifiers are public website configuration; account credentials, API tokens, cookies, and local environment files must never be committed.
 
 ## SEO output
 
@@ -138,4 +133,4 @@ Before publishing an update:
 
 The latest local acceptance evidence is recorded in `docs/qa/final-acceptance.md`. It distinguishes automated checks from browser screenshot review and does not claim that automation is manual testing.
 
-No custom domain has been purchased or connected. The `pages.dev` origin remains the canonical production address unless an owner-approved domain replaces it in a later release.
+No custom domain has been purchased or connected. The Vercel origin remains the canonical production address unless an owner-approved domain replaces it in a later release.

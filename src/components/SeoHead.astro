@@ -10,6 +10,7 @@ interface Props {
 const { title, description, canonical, openGraphType = 'website', noindex = false, jsonLd = [] } = Astro.props;
 ---
 <meta name="description" content={description}/>
+<meta name="google-site-verification" content="LRA7Fl4EzOfh_r13wpkGQoU7RnJQhUjmFwWfUA5_-UM"/>
 {noindex && <meta name="robots" content="noindex, nofollow"/>}
 <link rel="canonical" href={canonical}/>
 <meta property="og:title" content={title}/>
@@ -20,4 +21,11 @@ const { title, description, canonical, openGraphType = 'website', noindex = fals
 <meta name="twitter:title" content={title}/>
 <meta name="twitter:description" content={description}/>
 {jsonLd.map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)}/>)}
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-ERNNGMPKB0"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ERNNGMPKB0');
+</script>
 <title>{title}</title>

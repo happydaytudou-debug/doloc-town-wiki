@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 // Production origin. PUBLIC_SITE_URL remains available for explicit preview overrides.
-const site = process.env.PUBLIC_SITE_URL || 'https://doloc-town-wiki-3c1.pages.dev';
+const site = process.env.PUBLIC_SITE_URL || 'https://doloc-town-wiki-opal.vercel.app';
 const base = process.env.PUBLIC_BASE_PATH || '/';
 
 export default defineConfig({

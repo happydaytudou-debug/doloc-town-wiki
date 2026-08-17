@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = (path) => readFile(new URL(`../dist/${path}`, import.meta.url), 'utf8');
+const productionOrigin = 'https://doloc-town-wiki-opal.vercel.app';
 
 const categoryExpectations = [
   {
@@ -124,7 +125,7 @@ test('all sixteen guide routes render the complete guide contract', async () => 
 test('all indexable pages emit canonical, social metadata, and valid restrained JSON-LD', async () => {
   for (const path of contentPaths) {
     const html = await read(`${path ? `${path}/` : ''}index.html`);
-    const canonical = `https://doloc-town-wiki-3c1.pages.dev/${path ? `${path}/` : ''}`;
+    const canonical = `${productionOrigin}/${path ? `${path}/` : ''}`;
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`));
     assert.match(html, /<meta property="og:title" content="[^"]+"/);
     assert.match(html, /<meta property="og:description" content="[^"]+"/);
@@ -143,6 +144,17 @@ test('all indexable pages emit canonical, social metadata, and valid restrained 
   }
 });
 
+test('all pages emit Google Search Console verification and the GA4 Google tag', async () => {
+  const pages = ['index.html', '404.html', ...contentPaths.filter(Boolean).map((path) => `${path}/index.html`)];
+  for (const page of pages) {
+    const html = await read(page);
+    assert.match(html, /<meta name="google-site-verification" content="LRA7Fl4EzOfh_r13wpkGQoU7RnJQhUjmFwWfUA5_-UM">/);
+    assert.match(html, /<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-ERNNGMPKB0"><\/script>/);
+    assert.match(html, /gtag\('config', 'G-ERNNGMPKB0'\)/);
+    assert.doesNotMatch(html, /doloc-town-wiki-3c1\.pages\.dev|example\.invalid/);
+  }
+});
+
 test('404 is noindex and sitemap and robots contain exactly the twenty-one content routes', async () => {
   const notFound = await read('404.html');
   assert.match(notFound, /<meta name="robots" content="noindex, nofollow"/);
@@ -150,13 +162,14 @@ test('404 is noindex and sitemap and robots contain exactly the twenty-one conte
 
   const sitemap = await read('sitemap-0.xml');
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(urls.sort(), contentPaths.map((path) => `https://doloc-town-wiki-3c1.pages.dev/${path ? `${path}/` : ''}`).sort());
+  assert.deepEqual(urls.sort(), contentPaths.map((path) => `${productionOrigin}/${path ? `${path}/` : ''}`).sort());
   assert.ok(!urls.some((url) => url.includes('404')));
 
   const robots = await read('robots.txt');
   assert.match(robots, /User-agent: \*/);
   assert.match(robots, /Allow: \//);
-  assert.match(robots, /Sitemap: https:\/\/doloc-town-wiki-3c1\.pages\.dev\/sitemap-index\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/doloc-town-wiki-opal\.vercel\.app\/sitemap-index\.xml/);
+  assert.doesNotMatch(`${sitemap}\n${robots}`, /doloc-town-wiki-3c1\.pages\.dev|example\.invalid/);
 });
 
 test('shared shell and navigation expose the required accessibility contract', async () => {

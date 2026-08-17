@@ -20,14 +20,15 @@ test('project exposes the complete local verification workflow', async () => {
   ]);
 });
 
-test('production deployment uses the Cloudflare Pages origin and dist output', async () => {
-  const origin = 'https://doloc-town-wiki-3c1.pages.dev';
+test('production deployment uses the Vercel origin and dist output', async () => {
+  const origin = 'https://doloc-town-wiki-opal.vercel.app';
   const astroConfig = await readFile(new URL('../astro.config.mjs', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const wrangler = await readJson(new URL('../wrangler.json', import.meta.url));
 
   assert.match(astroConfig, new RegExp(origin.replaceAll('.', '\\.')));
   assert.doesNotMatch(astroConfig, /example\.invalid/);
+  assert.doesNotMatch(astroConfig, /doloc-town-wiki-3c1\.pages\.dev/);
   assert.match(readme, new RegExp(origin.replaceAll('.', '\\.')));
   assert.doesNotMatch(readme, /example\.invalid/);
   assert.deepEqual(wrangler, {
